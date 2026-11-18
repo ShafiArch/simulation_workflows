@@ -2,19 +2,20 @@
    worker housing. Themes match the works site and Fabrication Works (Trace, Night, Clay;
    key "site-theme"). Accents: --c1 daylight (sun amber), --c2 wind (pressure magenta),
    --c3 thermal. Comparable results sit in the same column of a .cmp grid, so one row reads
-   across the months, iterations or metrics. Figures drawn on white paper carry .sheet: the
-   white melts into the light themes (multiply) and becomes a paper card on Night. */
+   across the months, iterations or metrics. Nothing sits in a card: pictures exported on white
+   paper are made transparent (tools/build_img.py), with dark ink for Trace and Clay (.v-light)
+   and light ink for Night (.v-dark), so every result lies on the one plain canvas. */
 :root, [data-theme="trace"] {
   --bg: #f5f5f2; --ink: #111; --ink-2: #5d615c; --rule: rgba(0, 0, 0, 0.12); --accent: #c4512f;
-  --c1: #b77700; --c2: #b0306a; --c3: #c4512f; --sheet-bg: transparent; --sheet-blend: multiply; --code-bg: rgba(0, 0, 0, 0.04);
+  --c1: #b77700; --c2: #b0306a; --c3: #c4512f; --code-bg: rgba(0, 0, 0, 0.04);
 }
 [data-theme="night"] {
   --bg: #050505; --ink: #f1efea; --ink-2: #8f8d88; --rule: rgba(255, 255, 255, 0.14); --accent: #ffffff;
-  --c1: #f2b640; --c2: #ff6fa8; --c3: #ff8a5c; --sheet-bg: #f4f3ef; --sheet-blend: normal; --code-bg: rgba(255, 255, 255, 0.05);
+  --c1: #f2b640; --c2: #ff6fa8; --c3: #ff8a5c; --code-bg: rgba(255, 255, 255, 0.05);
 }
 [data-theme="clay"] {
   --bg: #ebe5da; --ink: #2a2420; --ink-2: #776c62; --rule: rgba(42, 36, 32, 0.16); --accent: #a8482a;
-  --c1: #9a6400; --c2: #9c2b5e; --c3: #a8482a; --sheet-bg: transparent; --sheet-blend: multiply; --code-bg: rgba(42, 36, 32, 0.05);
+  --c1: #9a6400; --c2: #9c2b5e; --c3: #a8482a; --code-bg: rgba(42, 36, 32, 0.05);
 }
 :root { --font: "Archivo", "Helvetica Neue", Arial, sans-serif; --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace; --gutter: clamp(16px, 3vw, 44px); --max: 1560px; color-scheme: light; }
 [data-theme="night"] { color-scheme: dark; }
@@ -91,15 +92,18 @@ h3 { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: v
 .cmp .big small { font-size: 11px; font-weight: 400; color: var(--ink-2); display: block; letter-spacing: 0; }
 .cmp .legend { grid-column: 2 / -1; max-width: 420px; }
 .cmp .rule { grid-column: 1 / -1; border-top: 1px solid var(--rule); margin: 4px 0; }
-.cmp figure.on img { outline: 2px solid var(--c); outline-offset: 2px; }
+.cmp figure[data-seq] { opacity: 0.6; transition: opacity 0.3s; cursor: pointer; }
+.cmp figure[data-seq].on, .cmp figure[data-seq]:hover { opacity: 1; }
 .cmp .empty { color: var(--ink-2); font-size: 12px; }
 .round img { border-radius: 50%; }
 
 figure { margin: 0; min-width: 0; }
 figure img { width: 100%; cursor: zoom-in; }
 figcaption { margin-top: 5px; font-size: 11.5px; color: var(--ink-2); }
-.sheet img, img.sheet { background: var(--sheet-bg); mix-blend-mode: var(--sheet-blend); border-radius: 3px; }
-[data-theme="night"] .sheet img, [data-theme="night"] img.sheet { padding: 4px; }
+img.v-dark { display: none; }
+[data-theme="night"] img.v-light { display: none; }
+[data-theme="night"] img.v-dark { display: block; }
+.draft { font-style: normal; font-size: 11px; color: var(--c); }
 
 /* sequence player: frames stacked in one place, cross faded; a row of steps under it */
 .seq { position: relative; }
@@ -131,7 +135,7 @@ figcaption { margin-top: 5px; font-size: 11.5px; color: var(--ink-2); }
 .chips li { font-size: 11.5px; border: 1px solid var(--rule); border-radius: 999px; padding: 3px 9px; color: var(--ink-2); }
 .chips li b { color: var(--ink); font-weight: 600; }
 
-pre.code { margin: 0; font-family: var(--mono); font-size: 11.5px; line-height: 1.6; background: var(--code-bg); border-left: 2px solid var(--c); padding: 12px 14px; overflow-x: auto; white-space: pre; }
+pre.code { margin: 0; font-family: var(--mono); font-size: 11.5px; line-height: 1.6; border-left: 2px solid var(--c); padding: 4px 0 4px 16px; overflow-x: auto; white-space: pre; }
 pre.code .k { color: var(--c); }
 pre.code .c { color: var(--ink-2); }
 

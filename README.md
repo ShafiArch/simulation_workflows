@@ -19,13 +19,19 @@ No build step; `.nojekyll` makes GitHub serve the files as they are.
 
 ## The page
 
-1. **Daylight.** Existing room at noon on the 21st of March, June, September and December:
+1. **Daylight** (Radiance, ClimateStudio in Grasshopper, HDRscope, TT Toolbox and Design
+   Explorer, Octopus). Existing room at noon on the 21st of March, June, September and December:
    illuminance, false colour luminance, histogram, and the Reinhart and Ward tone mapped views,
    one column per month. Annual metrics (UDI, sDA, ASE, average lux) existing against
    optimized, in the same columns, then the multi-objective search (Pareto front, Design Explorer).
 2. **Wind.** Butterfly CFD, six iterations of window size, location and spacing, vectors and
    pressure side by side, the full Grasshopper definition and the steps as pseudo code.
 3. **Thermal.** An empty section waiting for the thermal study.
+
+December's illuminance (mean about 740, median about 560 lux) is a draft read from the colours
+of the map against the 100 to 3000 lux scale, marked "draft" on the page; the same reading
+gives March, June and September medians within 2% of the presentation. Replace it in
+`index.html` with the simulated value.
 
 Sequences (the assembly, the four months, existing and optimized, the six wind iterations)
 play by themselves while on screen and stop when a step is clicked; they use the same small
@@ -44,9 +50,11 @@ in `index.html`.
 ## Themes
 
 Trace (default), Night and Clay, the same as the works site and Fabrication Works, remembered
-under the same key (`site-theme`), so a visitor's choice carries across the sites. Pictures on
-white paper carry the class `sheet`: the white melts into Trace and Clay and becomes a paper
-card on Night.
+under the same key (`site-theme`), so a visitor's choice carries across the sites. The page is
+one plain canvas, with no cards: pictures exported on white paper (wind, dashboards, charts,
+legends, the script sheet) are made transparent by `tools/build_img.py`, greys and lines
+turning into ink. Each comes twice, `name.webp` with dark ink for Trace and Clay and
+`name-n.webp` with light ink for Night; the page swaps them with the classes `v-light` and `v-dark`.
 
 ## Rules
 

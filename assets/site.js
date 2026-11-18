@@ -61,7 +61,6 @@
     if (!img || img.closest("[data-seq]")) return;
     var fig = img.closest("figure"), cap = fig.querySelector("figcaption");
     lbImg.src = img.dataset.l || img.currentSrc || img.src; lbImg.alt = img.alt;
-    lbImg.className = img.classList.contains("sheet") || img.closest(".sheet") ? "sheet" : "";
     lbCap.textContent = cap ? cap.textContent : img.alt;
     lb.classList.toggle("scroll", fig.classList.contains("readable"));
     lb.classList.add("open"); lb.scrollTop = 0;

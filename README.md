@@ -35,8 +35,9 @@ gives March, June and September medians within 2% of the presentation. Replace i
 
 Sequences (the assembly, the four months, existing and optimized, the six wind iterations)
 play by themselves while on screen and stop when a step is clicked; they use the same small
-pictures as the comparison grids, so they cost nothing extra to load. Visitors who ask their
-system for reduced motion see them paused.
+pictures as the comparison grids, so they cost nothing extra to load. They always run by
+default. The assembly builds up layer by layer with a slow fade (`data-build`, `--fade` on the
+player in `index.html`); the others cross fade. One accent colour, orange red, for the whole page.
 
 ## Adding the thermal study
 
@@ -44,7 +45,7 @@ Export the pictures into a new folder such as `Handloom/Thermal/`, make web copi
 `tools/build_img.py` the same way as the others (one crop box for every image in a series, so
 they line up), run `python3 tools/build_img.py` (needs `pip install pillow python-pptx`), and
 replace the empty `.placeholder` in the Thermal section of `index.html` with a `.cmp` grid like
-the wind one. Whenever `assets/style.css` or `assets/site.js` changes, raise `?v=1` on both tags
+the wind one. Whenever `assets/style.css` or `assets/site.js` changes, raise `?v=N` on both tags
 in `index.html`.
 
 ## Themes

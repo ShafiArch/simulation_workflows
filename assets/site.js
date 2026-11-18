@@ -1,7 +1,6 @@
 /* Simulation Workflows: theme switch, sequence players, lightbox, the current section in the top bar. */
 (function () {
   var root = document.documentElement;
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* themes: Trace, Night, Clay; remembered with the works site's key */
   var btns = [].slice.call(document.querySelectorAll(".themes button"));
@@ -16,10 +15,12 @@
 
   /* sequence players. <div class="seq" id="x" data-labels="A|B|C" data-ms="1400">: every .stack inside
      holds one child per frame. Anything on the page with data-seq="x" data-frame="i" lights up with
-     the current frame and jumps the player to its frame when clicked. Plays while on screen. */
+     the current frame and jumps the player to its frame when clicked. Always plays while on screen.
+     data-build: each frame adds to the one before (the assembly), so earlier frames stay visible
+     under the one fading in, and the loop fades the added layers away again. */
   [].slice.call(document.querySelectorAll(".seq")).forEach(function (seq) {
     var labels = (seq.dataset.labels || "").split("|");
-    var n = labels.length, i = 0, timer = null, playing = !reduce, visible = false;
+    var n = labels.length, i = 0, timer = null, playing = true, visible = false;
     var ms = +seq.dataset.ms || 1400;
     var stacks = [].slice.call(seq.querySelectorAll(".stack"));
     var linked = [].slice.call(document.querySelectorAll('[data-seq="' + seq.id + '"]'));
@@ -35,7 +36,8 @@
     bar.appendChild(play); bar.appendChild(steps); bar.appendChild(now); seq.appendChild(bar);
     function show(k) {
       i = (k + n) % n;
-      stacks.forEach(function (st) { [].forEach.call(st.children, function (c, j) { c.classList.toggle("on", j === i); }); });
+      var build = "build" in seq.dataset;
+      stacks.forEach(function (st) { [].forEach.call(st.children, function (c, j) { c.classList.toggle("on", build ? j <= i : j === i); }); });
       [].forEach.call(steps.children, function (c, j) { c.classList.toggle("on", j === i); });
       linked.forEach(function (el) { el.classList.toggle("on", +el.dataset.frame === i); });
       now.textContent = labels[i];

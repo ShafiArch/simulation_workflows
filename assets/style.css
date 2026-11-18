@@ -1,21 +1,21 @@
 /* Simulation Workflows: one page, daylight, wind and (later) thermal studies of handloom
    worker housing. Themes match the works site and Fabrication Works (Trace, Night, Clay;
-   key "site-theme"). Accents: --c1 daylight (sun amber), --c2 wind (pressure magenta),
-   --c3 thermal. Comparable results sit in the same column of a .cmp grid, so one row reads
+   key "site-theme"). One accent for the whole page, orange red; --c1, --c2 and --c3 are kept
+   as names but all point to it. Comparable results sit in the same column of a .cmp grid, so one row reads
    across the months, iterations or metrics. Nothing sits in a card: pictures exported on white
    paper are made transparent (tools/build_img.py), with dark ink for Trace and Clay (.v-light)
    and light ink for Night (.v-dark), so every result lies on the one plain canvas. */
 :root, [data-theme="trace"] {
   --bg: #f5f5f2; --ink: #111; --ink-2: #5d615c; --rule: rgba(0, 0, 0, 0.12); --accent: #c4512f;
-  --c1: #b77700; --c2: #b0306a; --c3: #c4512f; --code-bg: rgba(0, 0, 0, 0.04);
+  --c1: var(--accent); --c2: var(--accent); --c3: var(--accent); --code-bg: rgba(0, 0, 0, 0.04);
 }
 [data-theme="night"] {
-  --bg: #050505; --ink: #f1efea; --ink-2: #8f8d88; --rule: rgba(255, 255, 255, 0.14); --accent: #ffffff;
-  --c1: #f2b640; --c2: #ff6fa8; --c3: #ff8a5c; --code-bg: rgba(255, 255, 255, 0.05);
+  --bg: #050505; --ink: #f1efea; --ink-2: #8f8d88; --rule: rgba(255, 255, 255, 0.14); --accent: #ff6a3d;
+  --c1: var(--accent); --c2: var(--accent); --c3: var(--accent); --code-bg: rgba(255, 255, 255, 0.05);
 }
 [data-theme="clay"] {
   --bg: #ebe5da; --ink: #2a2420; --ink-2: #776c62; --rule: rgba(42, 36, 32, 0.16); --accent: #a8482a;
-  --c1: #9a6400; --c2: #9c2b5e; --c3: #a8482a; --code-bg: rgba(42, 36, 32, 0.05);
+  --c1: var(--accent); --c2: var(--accent); --c3: var(--accent); --code-bg: rgba(42, 36, 32, 0.05);
 }
 :root { --font: "Archivo", "Helvetica Neue", Arial, sans-serif; --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace; --gutter: clamp(16px, 3vw, 44px); --max: 1560px; color-scheme: light; }
 [data-theme="night"] { color-scheme: dark; }
@@ -109,7 +109,7 @@ img.v-dark { display: none; }
 .seq { position: relative; }
 .seq .tracks { display: grid; grid-template-columns: repeat(var(--t, 1), minmax(0, 1fr)); gap: 10px; }
 .seq .stack { display: grid; }
-.seq .stack > * { grid-area: 1 / 1; opacity: 0; transition: opacity 0.45s ease; pointer-events: none; }
+.seq .stack > * { grid-area: 1 / 1; opacity: 0; transition: opacity var(--fade, 0.6s) ease-in-out; pointer-events: none; }
 .seq .stack > .on { opacity: 1; pointer-events: auto; }
 .seq .bar { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 12px; color: var(--ink-2); }
 .seq .play { font: inherit; font-size: 11px; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--rule); background: none; color: var(--ink); cursor: pointer; display: inline-grid; place-items: center; flex: none; }
@@ -119,7 +119,6 @@ img.v-dark { display: none; }
 .seq .steps button.on { background: var(--c); border-color: var(--c); color: var(--bg); }
 .seq .now { margin-left: auto; color: var(--ink); font-weight: 600; white-space: nowrap; }
 .seq .tlab { font-size: 11px; color: var(--ink-2); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.08em; }
-@media (prefers-reduced-motion: reduce) { .seq .stack > * { transition: none; } }
 
 /* side by side layouts */
 .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(16px, 2.4vw, 36px); align-items: start; }
@@ -154,3 +153,6 @@ pre.code .c { color: var(--ink-2); }
 .lb p { margin: 10px 0 0; text-align: center; font-size: 12px; color: var(--ink-2); }
 .lb.scroll { place-items: start center; overflow: auto; }
 .lb.scroll img { max-height: none; max-width: none; width: min(4000px, 240vw); }
+
+/* legends are small screen grabs; keep them small so they stay sharp */
+img[src*="legend-"] { max-width: 230px; width: 100%; }

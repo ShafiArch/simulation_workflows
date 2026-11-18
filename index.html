@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Simulation Workflows · Shafiul Islam</title>
+  <meta name="description" content="Daylight and wind simulation workflows for handloom worker housing in Tangail, Bangladesh, by Shafiul Islam. Grasshopper, multi-objective daylight search and Butterfly CFD.">
+  <meta property="og:title" content="Simulation Workflows · Shafiul Islam">
+  <meta property="og:description" content="Daylight and wind studies for handloom worker housing in Tangail: existing conditions, a multi-objective search, and six CFD iterations.">
+  <meta property="og:image" content="https://shafiarch.github.io/simulation_workflows/img/assembly-4-l.webp">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%23b77700' stroke-width='2.5'/%3E%3Cpath d='M3 24c6-4 10 4 16 0s8-3 10-2' fill='none' stroke='%23b0306a' stroke-width='2.5'/%3E%3C/svg%3E">
+  <script>
+    /* theme before paint; the same key as the works site, so a visitor's choice carries over */
+    (function () { var t = "trace", q = new URLSearchParams(location.search).get("theme");
+      try { t = localStorage.getItem("site-theme") || t; } catch (e) {}
+      if (/^(trace|night|clay)$/.test(q || "")) t = q;
+      if (!/^(trace|night|clay)$/.test(t)) t = "trace";
+      document.documentElement.dataset.theme = t; })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/style.css?v=1">
+</head>
+<body>
+  <header class="top">
+    <a class="name" href="#top">Simulation Workflows</a>
+    <nav class="toc" aria-label="Sections">
+      <a href="#daylight" style="--c: var(--c1)"><span>01</span> Daylight</a>
+      <a href="#wind" style="--c: var(--c2)"><span>02</span> Wind</a>
+      <a href="#thermal" style="--c: var(--c3)"><span>03</span> Thermal</a>
+    </nav>
+    <div class="themes" role="group" aria-label="Theme">
+      <button type="button" data-theme="trace">Trace</button><button type="button" data-theme="night">Night</button><button type="button" data-theme="clay">Clay</button>
+    </div>
+    <a class="home" href="https://shafiarch.github.io/works_shafi/">Shafiul Islam</a>
+  </header>
+
+  <main id="top">
+    <section class="wrap intro">
+      <div>
+        <p class="kicker"><b>Handloom worker housing</b>Tangail, Bangladesh</p>
+        <h1>Simulation Workflows</h1>
+        <p class="lede">Environmental simulation for the homes and workshops of handloom weavers, built in Grasshopper and tested one parameter at a time.</p>
+        <div class="body">
+          <p>Three environmental parameters were optimized: wall material, daylight and airflow. Among mud, brick and corrugated iron, mud walls were chosen for their thermal performance. Skylights were introduced to reach 500 lux at the working plane, where the looms stand. Window size, location and spacing were then tuned with CFD so that air keeps moving through the rooms, holding 40 to 80% relative humidity by natural ventilation.</p>
+        </div>
+      </div>
+      <div><div class="seq" id="assembly" style="--c: var(--accent)" data-ms="1300" data-labels="Frame|Walls|Roof structure|Roofs" data-short="1|2|3|4"><div class="tracks"><div class="stack"><figure><img src="img/assembly-1.webp" data-l="img/assembly-1-l.webp" width="900" height="453" alt="Exploded view: timber frame" loading="lazy" decoding="async"></figure><figure><img src="img/assembly-2.webp" data-l="img/assembly-2-l.webp" width="900" height="453" alt="Exploded view: mud walls added" loading="lazy" decoding="async"></figure><figure><img src="img/assembly-3.webp" data-l="img/assembly-3-l.webp" width="900" height="453" alt="Exploded view: roof structure" loading="lazy" decoding="async"></figure><figure><img src="img/assembly-4.webp" data-l="img/assembly-4-l.webp" width="900" height="453" alt="Exploded view: complete cluster" loading="lazy" decoding="async"></figure></div></div></div></div>
+      <ol class="index">
+        <li><a href="#daylight" style="--c: var(--c1)"><span class="n">01</span><span class="t">Daylight</span><span class="m">Four seasons, annual metrics, a multi-objective search</span></a></li>
+        <li><a href="#wind" style="--c: var(--c2)"><span class="n">02</span><span class="t">Wind</span><span class="m">Butterfly CFD, six window iterations</span></a></li>
+        <li><a href="#thermal" style="--c: var(--c3)"><span class="n">03</span><span class="t">Thermal</span><span class="m">In preparation</span></a></li>
+      </ol>
+    </section>
+
+    <section class="sec" id="daylight" style="--c: var(--c1)">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="kicker"><b>01</b>Daylight</p>
+            <h2>Light for weaving</h2>
+            <p class="sub">Target: 500 lux at the working plane, without glare or direct sun on the looms</p>
+          </div>
+          <div class="cols">
+            <p>The existing room was simulated at noon on the 21st of March, June, September and December, each under its typical sky. The illuminance grid shows how much light reaches the working plane, the false colour views show where the eye meets bright openings, and the tone mapped views show how the room actually looks.</p>
+            <p>The annual metrics tell the rest: only 16.4% of the floor sits in the useful range, while direct sun overexposes 21.3% of it. A multi-objective search over window, slat and skylight dimensions then found options that daylight the whole floor with no sunlit hot spots and almost no glare.</p>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="bh"><h3>Existing, point in time</h3><span>Noon on the 21st, one column per month; click a month to hold it</span></div>
+          <div class="split wide-r">
+            <div><div class="seq" id="seasons" style="--t: 2; --c: var(--c1)" data-ms="1600" data-labels="March 21, 12 PM|June 21, 12 PM|September 21, 12 PM|December 21, 12 PM" data-short="Mar|Jun|Sep|Dec"><div class="tracks"><div><div class="tlab">Luminance</div><div class="stack"><figure><img src="img/lum-march.webp" data-l="img/lum-march-l.webp" width="420" height="420" alt="Luminance, March 21" loading="lazy" decoding="async"></figure><figure><img src="img/lum-june.webp" data-l="img/lum-june-l.webp" width="420" height="420" alt="Luminance, June 21" loading="lazy" decoding="async"></figure><figure><img src="img/lum-september.webp" data-l="img/lum-september-l.webp" width="420" height="420" alt="Luminance, September 21" loading="lazy" decoding="async"></figure><figure><img src="img/lum-december.webp" data-l="img/lum-december-l.webp" width="420" height="420" alt="Luminance, December 21" loading="lazy" decoding="async"></figure></div></div><div><div class="tlab">Tone mapped, Reinhart</div><div class="stack"><figure><img src="img/tone-reinhart-march.webp" data-l="img/tone-reinhart-march-l.webp" width="420" height="420" alt="Tone mapped view, March 21" loading="lazy" decoding="async"></figure><figure><img src="img/tone-reinhart-june.webp" data-l="img/tone-reinhart-june-l.webp" width="420" height="420" alt="Tone mapped view, June 21" loading="lazy" decoding="async"></figure><figure><img src="img/tone-reinhart-september.webp" data-l="img/tone-reinhart-september-l.webp" width="420" height="420" alt="Tone mapped view, September 21" loading="lazy" decoding="async"></figure><figure><img src="img/tone-reinhart-december.webp" data-l="img/tone-reinhart-december-l.webp" width="420" height="420" alt="Tone mapped view, December 21" loading="lazy" decoding="async"></figure></div></div></div></div></div>
+            <div class="scroller"><div class="cmp">
+<div class="lab"></div>
+<div class="col" data-seq="seasons" data-frame="0">March 21, 12 PM<small>CIE intermediate sky</small></div>
+<div class="col" data-seq="seasons" data-frame="1">June 21, 12 PM<small>CIE clear sky</small></div>
+<div class="col" data-seq="seasons" data-frame="2">September 21, 12 PM<small>CIE intermediate sky</small></div>
+<div class="col" data-seq="seasons" data-frame="3">December 21, 12 PM<small>CIE overcast sky</small></div>
+<div class="lab"><b>Illuminance</b>working plane, lux</div>
+<figure><img src="img/illum-march.webp" data-l="img/illum-march-l.webp" width="520" height="222" alt="Illuminance on the working plane, March 21" loading="lazy" decoding="async"></figure>
+<figure><img src="img/illum-june.webp" data-l="img/illum-june-l.webp" width="520" height="222" alt="Illuminance on the working plane, June 21" loading="lazy" decoding="async"></figure>
+<figure><img src="img/illum-september.webp" data-l="img/illum-september-l.webp" width="520" height="222" alt="Illuminance on the working plane, September 21" loading="lazy" decoding="async"></figure>
+<figure><img src="img/illum-december.webp" data-l="img/illum-december-l.webp" width="520" height="222" alt="Illuminance on the working plane, December 21" loading="lazy" decoding="async"></figure>
+<div class="lab"></div>
+<div class="num"><b>733</b>mean lux &nbsp; 446 median</div>
+<div class="num"><b>1878</b>mean lux &nbsp; 1799 median</div>
+<div class="num"><b>725</b>mean lux &nbsp; 443 median</div>
+<div class="num"><b>733</b>mean lux &nbsp; 446 median</div>
+<div class="lab"></div><div class="legend"><img src="img/legend-lux.webp" width="667" height="59" alt="Scale, 100 to 3000 lux" class="sheet" loading="lazy" decoding="async"></div>
+<div class="rule"></div>
+<div class="lab"><b>Luminance</b>false colour, cd/m²</div>
+<figure><img src="img/lum-march.webp" data-l="img/lum-march-l.webp" width="420" height="420" alt="Luminance in false colour, interior view, March 21" loading="lazy" decoding="async"></figure>
+<figure><img src="img/lum-june.webp" data-l="img/lum-june-l.webp" width="420" height="420" alt="Luminance in false colour, interior view, June 21" loading="lazy" decoding="async"></figure>
+<figure><img src="img/lum-september.webp" data-l="img/lum-september-l.webp" width="420" height="420" alt="Luminance in false colour, interior view, September 21" loading="lazy" decoding="async"></figure>
+<figure><img src="img/lum-december.webp" data-l="img/lum-december-l.webp" width="420" height="420" alt="Luminance in false colour, interior view, December 21" loading="lazy" decoding="async"></figure>
+<div class="lab"><b>At the working space</b></div>
+<div class="num"><b>about 35</b>cd/m²</div>
+<div class="num"><b>about 193</b>cd/m²</div>
+<div class="num"><b>about 40</b>cd/m²</div>
+<div class="num"><b>about 32</b>cd/m²</div>
+<div class="lab"><b>Histogram</b>whole view</div>
+<figure class="sheet"><img src="img/hist-march.webp" width="420" height="173" alt="Luminance histogram, March 21" loading="lazy" decoding="async"><figcaption>mean 68.8, median 37.2, max 6763 cd/m²</figcaption></figure>
+<figure class="sheet"><img src="img/hist-june.webp" width="420" height="174" alt="Luminance histogram, June 21" loading="lazy" decoding="async"><figcaption>mean 375.6, median 187.0, max 30964 cd/m²</figcaption></figure>
+<figure class="sheet"><img src="img/hist-september.webp" width="420" height="170" alt="Luminance histogram, September 21" loading="lazy" decoding="async"><figcaption>mean 70.5, median 36.9, max 5615 cd/m²</figcaption></figure>
+<figure class="sheet"><img src="img/hist-december.webp" width="420" height="173" alt="Luminance histogram, December 21" loading="lazy" decoding="async"><figcaption>mean 60.8, median 31.2, max 3153 cd/m²</figcaption></figure>
+<div class="lab"></div><div class="legend"><img src="img/legend-cdm2.webp" width="444" height="99" alt="Scale, 1 to 3000 cd per square metre" class="sheet" loading="lazy" decoding="async"></div>
+<div class="rule"></div>
+<div class="lab"><b>Tone mapped</b>Reinhart operator</div>
+<figure><img src="img/tone-reinhart-march.webp" data-l="img/tone-reinhart-march-l.webp" width="420" height="420" alt="Tone mapped interior view, Reinhart operator, March 21" loading="lazy" decoding="async"></figure>
+<figure><img src="img/tone-reinhart-june.webp" data-l="img/tone-reinhart-june-l.webp" width="420" height="420" alt="Tone mapped interior view, Reinhart operator, June 21" loading="lazy" decoding="async"></figure>
+<figure><img src="img/tone-reinhart-september.webp" data-l="img/tone-reinhart-september-l.webp" width="420" height="420" alt="Tone mapped interior view, Reinhart operator, September 21" loading="lazy" decoding="async"></figure>
+<figure><img src="img/tone-reinhart-december.webp" data-l="img/tone-reinhart-december-l.webp" width="420" height="420" alt="Tone mapped interior view, Reinhart operator, December 21" loading="lazy" decoding="async"></figure>
+<div class="lab"><b>Tone mapped</b>Ward operator</div>
+<figure><img src="img/tone-ward-march.webp" data-l="img/tone-ward-march-l.webp" width="420" height="420" alt="Tone mapped interior view, Ward operator, March 21" loading="lazy" decoding="async"></figure>
+<figure><img src="img/tone-ward-june.webp" data-l="img/tone-ward-june-l.webp" width="420" height="420" alt="Tone mapped interior view, Ward operator, June 21" loading="lazy" decoding="async"></figure>
+<figure><img src="img/tone-ward-september.webp" data-l="img/tone-ward-september-l.webp" width="420" height="420" alt="Tone mapped interior view, Ward operator, September 21" loading="lazy" decoding="async"></figure>
+<figure><img src="img/tone-ward-december.webp" data-l="img/tone-ward-december-l.webp" width="420" height="420" alt="Tone mapped interior view, Ward operator, December 21" loading="lazy" decoding="async"></figure>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="bh"><h3>Annual, existing against optimized</h3><span>Same plan, same scale in each column</span></div>
+          <div class="seq" id="annualseq" style="--t: 4; --c: var(--c1)" data-ms="1800" data-labels="Existing|Optimized" data-short="Existing|Optimized"><div class="tracks"><div><div class="tlab">UDI</div><div class="stack"><figure><img src="img/exist-udi.webp" data-l="img/exist-udi-l.webp" width="560" height="237" alt="Existing UDI" loading="lazy" decoding="async"></figure><figure><img src="img/opt-udi.webp" data-l="img/opt-udi-l.webp" width="560" height="243" alt="Optimized UDI" loading="lazy" decoding="async"></figure></div></div><div><div class="tlab">sDA</div><div class="stack"><figure><img src="img/exist-sda.webp" data-l="img/exist-sda-l.webp" width="560" height="237" alt="Existing sDA" loading="lazy" decoding="async"></figure><figure><img src="img/opt-sda.webp" data-l="img/opt-sda-l.webp" width="560" height="243" alt="Optimized sDA" loading="lazy" decoding="async"></figure></div></div><div><div class="tlab">ASE</div><div class="stack"><figure><img src="img/exist-ase.webp" data-l="img/exist-ase-l.webp" width="560" height="237" alt="Existing ASE" loading="lazy" decoding="async"></figure><figure><img src="img/opt-ase.webp" data-l="img/opt-ase-l.webp" width="560" height="243" alt="Optimized ASE" loading="lazy" decoding="async"></figure></div></div><div><div class="tlab">Average lux</div><div class="stack"><figure><img src="img/exist-lux.webp" data-l="img/exist-lux-l.webp" width="560" height="237" alt="Existing Average lux" loading="lazy" decoding="async"></figure><figure><img src="img/opt-lux.webp" data-l="img/opt-lux-l.webp" width="560" height="243" alt="Optimized Average lux" loading="lazy" decoding="async"></figure></div></div></div></div>
+          <div class="scroller" style="margin-top: 18px"><div class="cmp n5">
+<div class="lab"></div>
+<div class="col">UDI<small>useful daylight illuminance</small></div>
+<div class="col">sDA<small>spatial daylight autonomy</small></div>
+<div class="col">ASE<small>annual sunlight exposure</small></div>
+<div class="col">Average<small>annual illuminance</small></div>
+<div class="col">sDG<small>spatial disturbing glare</small></div>
+<div class="lab"><b>Existing</b></div>
+<div class="big">16.4%<small>of the floor in the useful range</small></div>
+<div class="big">13.8%<small>of the floor daylit for half the year</small></div>
+<div class="big">21.3%<small>of the floor over-sunlit</small></div>
+<div class="big">2347 lux<small>a lot of it from direct sun</small></div>
+<div class="empty">not simulated</div>
+<div class="lab"></div>
+<figure><img src="img/exist-udi.webp" data-l="img/exist-udi-l.webp" width="560" height="237" alt="Existing UDI map" loading="lazy" decoding="async"></figure>
+<figure><img src="img/exist-sda.webp" data-l="img/exist-sda-l.webp" width="560" height="237" alt="Existing sDA map" loading="lazy" decoding="async"></figure>
+<figure><img src="img/exist-ase.webp" data-l="img/exist-ase-l.webp" width="560" height="237" alt="Existing ASE map" loading="lazy" decoding="async"></figure>
+<figure><img src="img/exist-lux.webp" data-l="img/exist-lux-l.webp" width="560" height="237" alt="Existing Average map" loading="lazy" decoding="async"></figure>
+<div></div>
+<div class="lab">hourly and monthly profile</div>
+<figure class="sheet"><img src="img/dash-udi.webp" width="420" height="517" alt="Existing UDI dashboard with hourly and monthly charts" loading="lazy" decoding="async"></figure>
+<figure class="sheet"><img src="img/dash-sda.webp" width="420" height="513" alt="Existing sDA dashboard with hourly and monthly charts" loading="lazy" decoding="async"></figure>
+<figure class="sheet"><img src="img/dash-ase.webp" width="420" height="517" alt="Existing ASE dashboard with hourly and monthly charts" loading="lazy" decoding="async"></figure>
+<figure class="sheet"><img src="img/dash-lux.webp" width="420" height="514" alt="Existing Average dashboard with hourly and monthly charts" loading="lazy" decoding="async"></figure>
+<div></div>
+<div class="rule"></div>
+<div class="lab"><b>Optimized</b>selected option</div>
+<div class="big">about 98%<small>UDIa, autonomous range</small></div>
+<div class="big">100%<small>of the floor daylit</small></div>
+<div class="big">0%<small>no over-sunlit area</small></div>
+<div class="big">even<small>uniformity Emin/Eavg about 0.74</small></div>
+<div class="big">about 0<small>disturbing glare</small></div>
+<div class="lab"></div>
+<figure><img src="img/opt-udi.webp" data-l="img/opt-udi-l.webp" width="560" height="243" alt="Optimized UDI map" loading="lazy" decoding="async"></figure>
+<figure><img src="img/opt-sda.webp" data-l="img/opt-sda-l.webp" width="560" height="243" alt="Optimized sDA map" loading="lazy" decoding="async"></figure>
+<figure><img src="img/opt-ase.webp" data-l="img/opt-ase-l.webp" width="560" height="243" alt="Optimized ASE map" loading="lazy" decoding="async"></figure>
+<figure><img src="img/opt-lux.webp" data-l="img/opt-lux-l.webp" width="560" height="243" alt="Optimized Average map" loading="lazy" decoding="async"></figure>
+<figure><img src="img/opt-sdg.webp" data-l="img/opt-sdg-l.webp" width="560" height="243" alt="Optimized sDG map" loading="lazy" decoding="async"></figure>
+<div class="lab">legends</div>
+<div><img src="img/legend-udi.webp" width="712" height="53" alt="UDI bands: below 900, 900 to 2000, 2000 to 3000, above 3000 lux" class="sheet" loading="lazy" decoding="async"></div>
+<div><img src="img/legend-sda.webp" width="711" height="56" alt="sDA, 0 to 100 percent of hours" class="sheet" loading="lazy" decoding="async"></div>
+<div><img src="img/legend-ase.webp" width="708" height="55" alt="ASE, 0 to 250 hours" class="sheet" loading="lazy" decoding="async"></div>
+<div><img src="img/legend-avglux.webp" width="711" height="58" alt="Average illuminance, 100 to 3000 lux" class="sheet" loading="lazy" decoding="async"></div>
+<div></div>
+          </div></div>
+        </div>
+
+        <div class="block">
+          <div class="bh"><h3>The search</h3><span>6 genes, 3 objectives, population 100</span></div>
+          <div class="trio">
+            <figure class="sheet"><img src="img/pareto-octopus.webp" data-l="img/pareto-octopus-l.webp" width="900" height="405" alt="Multi-objective solver window with the Pareto front of window, slat and skylight options" loading="lazy" decoding="async"><figcaption>Every box is one evaluated option; the dark ones form the Pareto front. 197 evaluated, 33 non-dominated.</figcaption></figure>
+            <figure class="sheet"><img src="img/pareto-front.webp" data-l="img/pareto-front-l.webp" width="640" height="312" alt="The Pareto front in three objectives: maximize UDI, minimize sDG, even distribution" loading="lazy" decoding="async"><figcaption>Axes: maximize UDI, minimize spatial disturbing glare, and uniformity (Emin/Eavg).</figcaption></figure>
+            <figure class="sheet"><img src="img/plotted-options.webp" data-l="img/plotted-options-l.webp" width="420" height="397" alt="Scatter plots of glare against uniformity for the options" loading="lazy" decoding="async"><figcaption>Glare (DGa) against uniformity (Emin/Eavg).</figcaption></figure>
+          </div>
+          <div class="split wide-l" style="margin-top: 16px">
+            <figure class="sheet"><img src="img/design-explorer.webp" data-l="img/design-explorer-l.webp" width="1400" height="292" alt="Design Explorer parallel coordinates with the selected option highlighted" loading="lazy" decoding="async"><figcaption>All options in Design Explorer; the dark line is the selected option.</figcaption></figure>
+            <div>
+              <dl class="facts">
+                <dt>Genes</dt><dd>window width and length, number of slats, slat angle, skylight position and length</dd>
+                <dt>Objectives</dt><dd>maximize UDI, minimize spatial disturbing glare, maximize uniformity</dd>
+                <dt>Solver</dt><dd>HypE reduction and mutation, elitism 0.5, crossover 0.8, about 55 s per option</dd>
+              </dl>
+              <ul class="chips">
+                <li>window width <b>about 0.9</b></li><li>window length <b>about 1.6</b></li><li>slats <b>14</b></li><li>slat angle <b>about 65°</b></li><li>skylight position <b>2.5</b></li><li>skylight length <b>about 1.1</b></li>
+              </ul>
+              <ul class="chips">
+                <li>UDIa <b>0.98</b></li><li>sDA <b>1.00</b></li><li>ASE <b>0.00</b></li><li>DGa <b>about 0</b></li><li>Emin/Eavg <b>about 0.74</b></li>
+              </ul>
+              <p style="margin-top: 10px; font-size: 12px; color: var(--ink-2)">Values read from the Design Explorer selection.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="wind" style="--c: var(--c2)">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="kicker"><b>02</b>Wind</p>
+            <h2>Air that keeps moving</h2>
+            <p class="sub">Grasshopper and Butterfly (OpenFOAM): size, location and spacing of windows</p>
+          </div>
+          <div class="cols">
+            <p>The workflow was built with the Butterfly plugin to remove stagnant air from a handloom worker's home. Starting from the geometry and the wind input, the simulation used site data from Tangail to set the inlet and outlet pressure conditions.</p>
+            <p>Each iteration changed the size, location and spacing of the windows. The vector and pressure maps show the stagnant zones shrinking step by step, until the final configuration keeps air moving across every occupied zone: cross ventilation through the whole year, for comfort and a healthier room.</p>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="bh"><h3>Six iterations</h3><span>Vectors and pressure on the working plane, played together; click any iteration to hold it</span></div>
+          <div class="split wide-r">
+            <div><div class="seq" id="windseq" style="--t: 2; --c: var(--c2)" data-ms="1500" data-labels="Iteration 01|Iteration 02|Iteration 03|Iteration 04|Iteration 05|Iteration 06"><div class="tracks"><div><div class="tlab">Vectors</div><div class="stack"><figure class="sheet"><img src="img/wind-vector-1.webp" data-l="img/wind-vector-1-l.webp" width="560" height="392" alt="Wind vectors, iteration 1" loading="lazy" decoding="async"></figure><figure class="sheet"><img src="img/wind-vector-2.webp" data-l="img/wind-vector-2-l.webp" width="560" height="392" alt="Wind vectors, iteration 2" loading="lazy" decoding="async"></figure><figure class="sheet"><img src="img/wind-vector-3.webp" data-l="img/wind-vector-3-l.webp" width="560" height="392" alt="Wind vectors, iteration 3" loading="lazy" decoding="async"></figure><figure class="sheet"><img src="img/wind-vector-4.webp" data-l="img/wind-vector-4-l.webp" width="560" height="392" alt="Wind vectors, iteration 4" loading="lazy" decoding="async"></figure><figure class="sheet"><img src="img/wind-vector-5.webp" data-l="img/wind-vector-5-l.webp" width="560" height="392" alt="Wind vectors, iteration 5" loading="lazy" decoding="async"></figure><figure class="sheet"><img src="img/wind-vector-6.webp" data-l="img/wind-vector-6-l.webp" width="560" height="392" alt="Wind vectors, iteration 6" loading="lazy" decoding="async"></figure></div></div><div><div class="tlab">Pressure</div><div class="stack"><figure class="sheet"><img src="img/wind-pressure-1.webp" data-l="img/wind-pressure-1-l.webp" width="560" height="392" alt="Wind pressure, iteration 1" loading="lazy" decoding="async"></figure><figure class="sheet"><img src="img/wind-pressure-2.webp" data-l="img/wind-pressure-2-l.webp" width="560" height="392" alt="Wind pressure, iteration 2" loading="lazy" decoding="async"></figure><figure class="sheet"><img src="img/wind-pressure-3.webp" data-l="img/wind-pressure-3-l.webp" width="560" height="392" alt="Wind pressure, iteration 3" loading="lazy" decoding="async"></figure><figure class="sheet"><img src="img/wind-pressure-4.webp" data-l="img/wind-pressure-4-l.webp" width="560" height="392" alt="Wind pressure, iteration 4" loading="lazy" decoding="async"></figure><figure class="sheet"><img src="img/wind-pressure-5.webp" data-l="img/wind-pressure-5-l.webp" width="560" height="392" alt="Wind pressure, iteration 5" loading="lazy" decoding="async"></figure><figure class="sheet"><img src="img/wind-pressure-6.webp" data-l="img/wind-pressure-6-l.webp" width="560" height="392" alt="Wind pressure, iteration 6" loading="lazy" decoding="async"></figure></div></div></div></div></div>
+            <div class="scroller"><div class="cmp n6">
+<div class="lab"></div>
+<div class="col" data-seq="windseq" data-frame="0">Iteration 01</div>
+<div class="col" data-seq="windseq" data-frame="1">Iteration 02</div>
+<div class="col" data-seq="windseq" data-frame="2">Iteration 03</div>
+<div class="col" data-seq="windseq" data-frame="3">Iteration 04</div>
+<div class="col" data-seq="windseq" data-frame="4">Iteration 05</div>
+<div class="col" data-seq="windseq" data-frame="5">Iteration 06</div>
+<div class="lab"><b>Wind vectors</b>working plane</div>
+<figure class="sheet" data-seq="windseq" data-frame="0"><img src="img/wind-vector-1.webp" data-l="img/wind-vector-1-l.webp" width="560" height="392" alt="Wind vectors, iteration 1" loading="lazy" decoding="async"></figure>
+<figure class="sheet" data-seq="windseq" data-frame="1"><img src="img/wind-vector-2.webp" data-l="img/wind-vector-2-l.webp" width="560" height="392" alt="Wind vectors, iteration 2" loading="lazy" decoding="async"></figure>
+<figure class="sheet" data-seq="windseq" data-frame="2"><img src="img/wind-vector-3.webp" data-l="img/wind-vector-3-l.webp" width="560" height="392" alt="Wind vectors, iteration 3" loading="lazy" decoding="async"></figure>
+<figure class="sheet" data-seq="windseq" data-frame="3"><img src="img/wind-vector-4.webp" data-l="img/wind-vector-4-l.webp" width="560" height="392" alt="Wind vectors, iteration 4" loading="lazy" decoding="async"></figure>
+<figure class="sheet" data-seq="windseq" data-frame="4"><img src="img/wind-vector-5.webp" data-l="img/wind-vector-5-l.webp" width="560" height="392" alt="Wind vectors, iteration 5" loading="lazy" decoding="async"></figure>
+<figure class="sheet" data-seq="windseq" data-frame="5"><img src="img/wind-vector-6.webp" data-l="img/wind-vector-6-l.webp" width="560" height="392" alt="Wind vectors, iteration 6" loading="lazy" decoding="async"></figure>
+<div class="lab"><b>Wind pressure</b>Pa</div>
+<figure class="sheet" data-seq="windseq" data-frame="0"><img src="img/wind-pressure-1.webp" data-l="img/wind-pressure-1-l.webp" width="560" height="392" alt="Wind pressure, iteration 1" loading="lazy" decoding="async"></figure>
+<figure class="sheet" data-seq="windseq" data-frame="1"><img src="img/wind-pressure-2.webp" data-l="img/wind-pressure-2-l.webp" width="560" height="392" alt="Wind pressure, iteration 2" loading="lazy" decoding="async"></figure>
+<figure class="sheet" data-seq="windseq" data-frame="2"><img src="img/wind-pressure-3.webp" data-l="img/wind-pressure-3-l.webp" width="560" height="392" alt="Wind pressure, iteration 3" loading="lazy" decoding="async"></figure>
+<figure class="sheet" data-seq="windseq" data-frame="3"><img src="img/wind-pressure-4.webp" data-l="img/wind-pressure-4-l.webp" width="560" height="392" alt="Wind pressure, iteration 4" loading="lazy" decoding="async"></figure>
+<figure class="sheet" data-seq="windseq" data-frame="4"><img src="img/wind-pressure-5.webp" data-l="img/wind-pressure-5-l.webp" width="560" height="392" alt="Wind pressure, iteration 5" loading="lazy" decoding="async"></figure>
+<figure class="sheet" data-seq="windseq" data-frame="5"><img src="img/wind-pressure-6.webp" data-l="img/wind-pressure-6-l.webp" width="560" height="392" alt="Wind pressure, iteration 6" loading="lazy" decoding="async"></figure>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="bh"><h3>The Butterfly script</h3><span>Click the sheet to read it at full size</span></div>
+          <div class="split wide-l">
+            <figure class="readable"><img src="img/butterfly-script.webp" data-l="img/butterfly-script-l.webp" width="1800" height="636" alt="Ventilation simulation framework: the Grasshopper and Butterfly definition with its ten steps and the six iterations" loading="lazy" decoding="async"><figcaption>Ventilation simulation framework, the full definition.</figcaption></figure>
+            <pre class="code"><span class="c"># ventilation simulation, one iteration (pseudo code)</span>
+geometry  = rhino_model(walls, roof, windows)     <span class="c"># 1 Grasshopper geometry</span>
+inlet     = wind_in(tangail_wind)                 <span class="c"># 2 wind in</span>
+outlet    = wind_out(pressure = 0)                <span class="c"># 3 wind out</span>
+model     = butterfly.model(geometry, inlet, outlet, wall_boundary)   <span class="c"># 4</span>
+mesh      = block_mesh(model) + snappy_hex_mesh(refine_levels)        <span class="c"># 5</span>
+grid      = analysis_grid(working_plane, grid_size = 0.3)             <span class="c"># 6</span>
+solution  = parameters(turbulence, fv_schemes, relaxation)            <span class="c"># 7</span>
+<span class="k">run</span>        butterfly.solve(model, mesh, solution, steady_state)      <span class="c"># 8</span>
+vectors   = probe(grid, "U")                      <span class="c"># 9 wind vectors</span>
+pressure  = color_map(probe(grid, "p"), unit = "Pa")   <span class="c"># 10 colour mapping</span>
+
+<span class="k">repeat</span>
+    change window size, location, spacing
+    <span class="k">run</span> again
+<span class="k">until</span> no stagnant zone on the working plane      <span class="c"># iteration 06</span></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="thermal" style="--c: var(--c3)">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="kicker"><b>03</b>Thermal</p>
+            <h2>Thermal</h2>
+            <p class="sub">In preparation</p>
+          </div>
+          <div class="cols"><p>The thermal simulation of the mud wall house will be added here.</p></div>
+        </div>
+        <div class="placeholder" aria-hidden="true"><div></div><div></div><div></div><div></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <span>Shafiul Islam · Simulation Workflows</span>
+      <span><a href="https://shafiarch.github.io/works_shafi/">Works</a> · <a href="https://shafiarch.github.io/works_fabrications/">Fabrication Works</a> · <a href="https://github.com/ShafiArch/simulation_workflows">Source files</a></span>
+    </div>
+  </footer>
+  <script src="assets/site.js?v=1"></script>
+</body>
+</html>
